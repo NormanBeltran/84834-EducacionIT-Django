@@ -11,5 +11,20 @@
     <h3>Profesor: {{ profesor }}</h3>
 
     <h4>Los días de cursada son {{ dias }}</h4>
+
+    <h3>Cursos:</h3>
+    {% for c in cursos %}
+        <p>{{ c }}</p>
+    {% endfor %}
+
+    <h3>Notas:</h3>
+    {% for n in notas %}
+        {% if n >= 7 %}
+            <p style="color: green;">{{ n }} - Aprobado</p>
+        {% else %}
+            <p style="color: red;">{{ n }} - Reprobado</p>
+        {% endif %}
+        
+    {% endfor %}
 </body>
 </html>

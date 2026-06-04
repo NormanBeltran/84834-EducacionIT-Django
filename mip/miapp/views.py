@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
+from . import forms
 
 import sqlite3
 
@@ -119,6 +120,46 @@ def bienvenido(request):
 def bienvenido2(request):
     pagina = "miapp/bienvenido2.html"  # Por default Django busca la carpeta /templates dentro de la aplicacion
     ctx = { "nombre": "Curso De Django (Desarrollo Web)", "comision": 84834, "dias": "Lunes y Jueves",
-           "profesor": "Norman Beltran"}
+           "profesor": "Norman Beltran", "cursos": ["Python Inicial", "Python Avanzado", "Análisis de datos con Python", "IA con Python", "Django"],
+           "notas": [8,9,5,10,8,4]}
     return render(request, pagina, ctx)
-    
+
+# Recuperamos de la BD todos los cursos para enviarlos al HTML en un objeto dentro del contexto
+# render() resuelve llamando a DTL para completar el contenido de la pagina
+
+def allCursos(request):
+    conn = sqlite3.connect('curso.db')    
+    cursor = conn.cursor()
+    cursor.execute('SELECT id, nombre, inscriptos from cursos;')
+    cursos = cursor.fetchall()
+    ctx = {"cursos": cursos}
+    conn.close()
+    return render(request, "miapp/allcursos.html", ctx)    
+
+def unCurso(request, id):
+    conn = sqlite3.connect('curso.db')    
+    cursor = conn.cursor()
+    cursor.execute(f'SELECT id, nombre, inscriptos from cursos WHERE id = {id};')
+    curso = cursor.fetchone()
+    ctx = {"curso": curso}
+    conn.close()
+    return render(request, "miapp/uncurso.html", ctx)        
+
+
+def nuevoCurso(request):
+    if request.method == "POST": # Es la segunda o enesima vez que llama a esta funcion
+        form = forms.FormularioCurso(request.POST)
+        if  form.is_valid():
+            nombre = form.cleaned_data['nombre']
+            inscriptos = form.cleaned_data['inscriptos']
+            conn = sqlite3.connect('curso.db')    
+            cursor = conn.cursor()
+            cursor.execute(f"INSERT INTO cursos (nombre, inscriptos) VALUES ('{nombre}', {inscriptos})")
+            conn.commit()
+            conn.close()
+            return HttpResponse("Curso guardado exitosamente!")
+    else:  # Es la primera vez o sea creo un formulario vacio
+        form = forms.FormularioCurso()
+
+    ctx = {"form": form}
+    return render(request, "miapp/nuevocurso.html", ctx)
