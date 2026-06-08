@@ -48,3 +48,30 @@ En una carpeta vacia de nuestro disco:
     - Validar que el formulario tenga los datos válidos
     - Si todo es válido ejecutar la acción (p.e. guardar los datos en la BD)
     - retornar a la pagina elegida
+
+# HTML Diseño Bootstrap https://getbootstrap.com    
+
+## Diseño
+- Crear un archivo base.html / index.html que va a contener todo el diseño de la aplicación
+- Crear los bloques que van a ir cambiando a lo largo de la navegación
+- Leer los archivos estáticos que tienen que estar en la carpeta:
+    - static (dentro de la aplicación), pueden ser archivos css, javascript, imagenes, videos, audios
+
+- Para heredar el diseño, cualquier pagina que se cree, tiene que extender el base.html
+- Y cada bloque se redefina tiene que estar encerrado entre {% block nombre %}contenido{% endblock %}
+
+# ORM (Object Relational Mapping)
+- En models.py dentro de la carpeta de la aplicacion creamos las clases que van a formar parte de las 
+tablas de mi BD
+- Ejecutamos desde la terminal python manage.py makemigrations [miapp]
+  - Esto crea los scripts para despues crear las tablas en la BD
+- Ejecutamos desde la terminal python manage.py migrate
+  - Ejecuta los scripts para crear las tablas en la BD
+
+# Formularios con ORM
+- en forms.py:
+    - importamos ModelForm (este modulo vincula Form con Model)
+    - La clase formulario la heredamos de ModelForm
+    - Creamos una clase Meta (metadatos) donde definimos el model y fields con los campos que queremos
+    que aparezcan en el formulario
+- En views.py en la funcion directamente grabamos el form (porque esta asociado a el modelo con todos sus atributos)

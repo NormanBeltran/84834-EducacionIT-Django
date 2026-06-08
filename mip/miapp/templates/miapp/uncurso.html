@@ -1,13 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cursos</title>
-</head>
-<body>
-    <h1>Un curso</h1>
+{% extends "miapp/base.html" %}
 
+{% block title %}Curso{% endblock %}
+
+{% block content %}
     <table style="border:2px solid black; border-collapse: collapse;">
         <thead>
             <tr>
@@ -24,5 +19,4 @@
             </tr>
         </tbody>
     </table>
-</body>
-</html>
+{% endblock %}

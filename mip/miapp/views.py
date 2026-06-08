@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from . import forms
+from .models import *
 
 import sqlite3
 
@@ -145,7 +146,7 @@ def unCurso(request, id):
     conn.close()
     return render(request, "miapp/uncurso.html", ctx)        
 
-
+# Formulario de un nuevo curso sin ORM
 def nuevoCurso(request):
     if request.method == "POST": # Es la segunda o enesima vez que llama a esta funcion
         form = forms.FormularioCurso(request.POST)
@@ -163,3 +164,20 @@ def nuevoCurso(request):
 
     ctx = {"form": form}
     return render(request, "miapp/nuevocurso.html", ctx)
+
+# Formulario de un nuevo curso con ORM
+def nuevoCursoORM(request):
+    if request.method == "POST": # Es la segunda o enesima vez que llama a esta funcion
+        form = forms.FormularioCurso(request.POST)
+        if  form.is_valid():
+            form.save()
+            return HttpResponse("Curso guardado exitosamente (orm)!")
+    else:  # Es la primera vez o sea creo un formulario vacio
+        form = forms.FormularioCurso()
+
+    ctx = {"form": form}
+    return render(request, "miapp/nuevocurso.html", ctx)
+
+def cursos_orm(request):
+    cursos = Curso.objects.all()
+    return render(request, "miapp/cursos_orm.html", {"cursos": cursos})

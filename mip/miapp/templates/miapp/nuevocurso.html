@@ -1,11 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nuevo Curso</title>
-</head>
-<body>
+{% extends "miapp/base.html" %}
+
+{% block title %}Nuevo Curso{% endblock %}
+
+{% block content %}
     <h1>Nuevo Curso</h1> 
     <form method="post">
         {% csrf_token %}
@@ -16,5 +13,10 @@
     </form>
 
     <a href="{% url 'allcursos' %}">Ver todos los cursos</a>
-</body>
-</html>
+{% endblock %}
+{% block footer %}
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+            © 2026 Copyright:
+            <a class="text-white" href="https://www.linkedin.com/in/norman-beltran/">By EducacionIT</a>
+        </div>          
+{% endblock footer %}

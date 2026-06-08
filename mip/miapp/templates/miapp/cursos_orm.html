@@ -13,14 +13,18 @@
                 <th>ID</th>
                 <th>Nombre</th>
                 <th>Inscriptos</th>
+                <th>Profesor</th>
+                <th>Email</th>
             </tr>
         </thead>
         <tbody>
-        {% for id, nombre, inscriptos in cursos %}
+        {% for c in cursos %}
                 <tr>
-                    <td>{{ id }}</td>
-                    <td>{{ nombre }}</td>
-                    <td>{{ inscriptos }}</td>
+                    <td>{{ c.id }}</td>
+                    <td>{{ c.nombre }}</td>
+                    <td>{{ c.inscriptos }}</td>
+                    <td>{{ c.profesor }}</td>
+                    <td>{{ c.email }}</td>
                 </tr>
         {% endfor %}
         </tbody>

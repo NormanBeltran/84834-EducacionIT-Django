@@ -1,7 +1,13 @@
 from django import forms
 from django.forms import ModelForm
+from .models import *
 
-class FormularioCurso(forms.Form):
+class FormularioCurso(ModelForm):
+    class Meta:
+        model = Curso 
+        fields = ("nombre", "inscriptos", "profesor", "email")
+
+"""    
     nombre = forms.CharField(max_length=50)
     inscriptos = forms.IntegerField()
     
@@ -18,4 +24,4 @@ class FormularioCurso(forms.Form):
     fecha_inicio = forms.DateField(input_formats=["%d/%m/%Y"])
     fecha_fin = forms.DateField(input_formats=["%d/%m/%Y"])
     email = forms.EmailField(required=True)
-    
+"""    

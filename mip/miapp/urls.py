@@ -12,7 +12,12 @@ urlpatterns = [
     path("bienvenido",  views.bienvenido,           name="bienvenido"),  
     path("bienvenido2", views.bienvenido2,          name="bienvenido2"),  
 
+    # Sin ORM
     path("allcursos",       views.allCursos,        name="allcursos"),  
     path("uncurso/<id>/",   views.unCurso,          name="uncurso"),  
     path("nuevocurso",      views.nuevoCurso,       name="nuevocurso"),  
+
+    # Con ORM
+    path("nuevocursoorm",   views.nuevoCursoORM,    name="nuevocursoorm"),  
+    path("allcursosorm",    views.cursos_orm,       name="allcursosorm"),  
 ]
