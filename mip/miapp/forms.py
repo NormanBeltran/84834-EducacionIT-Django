@@ -7,6 +7,12 @@ class FormularioCurso(ModelForm):
         model = Curso 
         fields = ("nombre", "inscriptos", "profesor", "email")
 
+
+class FormularioProfesor(ModelForm):
+    class Meta:
+        model = Profesor 
+        fields = ("nombre", "apellido", "especialidad", "email")
+
 """    
     nombre = forms.CharField(max_length=50)
     inscriptos = forms.IntegerField()

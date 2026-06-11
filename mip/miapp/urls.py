@@ -20,4 +20,7 @@ urlpatterns = [
     # Con ORM
     path("nuevocursoorm",   views.nuevoCursoORM,    name="nuevocursoorm"),  
     path("allcursosorm",    views.cursos_orm,       name="allcursosorm"),  
+
+    path("nuevoprofesororm",   views.nuevoProfesorORM,    name="nuevoprofesororm"),  
+    path("profesores_orm",     views.profesores_orm,      name="profesores_orm"),  
 ]

@@ -75,3 +75,32 @@ tablas de mi BD
     - Creamos una clase Meta (metadatos) donde definimos el model y fields con los campos que queremos
     que aparezcan en el formulario
 - En views.py en la funcion directamente grabamos el form (porque esta asociado a el modelo con todos sus atributos)
+
+# Ejemplos de instrucciones ORM de Django https://unwiredlearning.com/blog/django-orm-crud
+
+# Aplicacion Admin que viene por default con Django
+
+## Objetivo
+   - Permite administrar autenticación y autorización en el panel de administracion
+   - Gestiona permisos a nivel de usuario o grupos
+   - Grupos son roles donde agrupo los permisos sobre los modelos a nivel de 
+     - visualizacion
+     - actualizacion
+     - creacion de registros
+     - eliminacion de registros
+
+## Como gestionar modelos en el panel     
+- Crear el superuser: python manage.py createsuperuser
+- Para incorporar modelos de negocio:
+    - abrir el admin.py dentro de la aplicacion
+    - importar clases de modelos con: from .models import * 
+    - registrar los modelos con admin.site.register(nombre_modelo)
+
+## Caracteristicas especiales
+- Podemos gestionar nombres de los modelos en plural o singular en la clase Meta dentro de la 
+  clase del modelo
+- También podemos definir el orden de presentación con el campo ordering
+
+## Look & Feel de Panel de Admin
+- https://django-jazzmin.readthedocs.io/
+

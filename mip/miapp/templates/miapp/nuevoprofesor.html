@@ -1,0 +1,17 @@
+{% extends "miapp/base.html" %}
+
+{% block title %}Nuevo Profesor{% endblock %}
+
+{% block content %}
+    <h1>Nuevo Profesor</h1> 
+    <form method="post">
+        {% csrf_token %}
+        <table style="border:2px solid black; border-collapse: collapse;">
+            {{ form.as_table }}
+        </table>
+        <input type="submit" value="Crear Profesor">    
+    </form>
+
+    <a href="{% url 'profesores_orm' %}">Ver todos los profesores</a>
+{% endblock %}
+s

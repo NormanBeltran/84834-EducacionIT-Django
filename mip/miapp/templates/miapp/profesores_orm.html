@@ -1,0 +1,32 @@
+{% extends "miapp/base.html" %}
+
+{% block title %}Lista de Profesores{% endblock %}
+
+{% block content %}
+    <h1>Lista de Profesores</h1>
+
+    <h3>Profesores:</h3>
+
+    <table style="border:2px solid black; border-collapse: collapse;">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Especialidad</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for profesor in profesores %}
+                <tr>
+                    <td>{{ profesor.id }}</td>
+                    <td>{{ profesor.nombre }}</td>
+                    <td>{{ profesor.apellido }}</td>
+                    <td>{{ profesor.get_especialidad_display }}</td>
+                    <td>{{ profesor.email }}</td>
+                </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
+from django.urls import reverse
 from . import forms
 from .models import *
 
@@ -181,3 +182,20 @@ def nuevoCursoORM(request):
 def cursos_orm(request):
     cursos = Curso.objects.all()
     return render(request, "miapp/cursos_orm.html", {"cursos": cursos})
+
+# Formulario de un nuevo curso con ORM - Profesores
+def nuevoProfesorORM(request):
+    if request.method == "POST": # Es la segunda o enesima vez que llama a esta funcion
+        form = forms.FormularioProfesor(request.POST)
+        if  form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse("profesores_orm"))
+    else:  # Es la primera vez o sea creo un formulario vacio
+        form = forms.FormularioProfesor()
+
+    ctx = {"form": form}
+    return render(request, "miapp/nuevoprofesor.html", ctx)
+
+def profesores_orm(request):
+    profesores = Profesor.objects.all()
+    return render(request, "miapp/profesores_orm.html", {"profesores": profesores})
