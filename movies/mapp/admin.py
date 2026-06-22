@@ -9,7 +9,7 @@ class CompanyAdmin(admin.ModelAdmin):
 
 class MovieAdmin(admin.ModelAdmin):
     readonly_fields = ("created", "updated")   
-    list_display = ("id", "name", "description", "premiere") 
+    list_display = ("id", "pelicula", "sinopsis", "stars", "premiere") 
     list_filter = ("genders", "company")
 
 # Register your models here.

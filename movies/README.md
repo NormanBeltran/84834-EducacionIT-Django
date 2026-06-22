@@ -29,3 +29,13 @@
 - Crear las carpetas media/movies con la misma jerarquia del proyecto    
 - En el urls.py del Proyecto consultamos si estamos en modo DEBUG para utilizar una u otra variable MEDIA_[URL|ROOT]
 - Super User: admin / Password: 1234
+
+## Diseño
+- Tomamos algun template existente y lo modificamos para que tome los archivos estáticos
+  - img, js, css, etc.
+- En la carpeta static dentro de la aplicación copiamos todas las carpetas de archivos estaticos del template
+
+## Clase Based Views (https://ccbv.co.uk/)
+- Trabaja por default con nombres por convención para los html y para los objetos que pasa a los htmls
+- Por ejemplo gender_list.html, o el queryset como gender_list
+- Sin embargo me permite cambiar las convenciones, podria redefinir el nombre del template (template_name)

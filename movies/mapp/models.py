@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.html import format_html
 from django.contrib import admin
+from django.core.exceptions import ValidationError
 
 # Géneros de Películas (1 a +)
 class Gender(models.Model):
@@ -51,6 +52,11 @@ class Movie(models.Model):
 
     def __str__(self):
         return f"{self.name}"
+    
+    def clean(self):
+        super().clean() # Se validen los controles de las clases madre
+        if self.premiere < 1920 or self.premiere > 2050:
+            raise ValidationError({'premiere': "Año inválido no puede ser menor a 1920"})
 
     class Meta:
         verbose_name_plural = "Películas"
@@ -59,4 +65,13 @@ class Movie(models.Model):
 
     @admin.display(ordering="description")
     def sinopsis(self):
-        return format_html(self.description[:50])
+        return format_html("<strong>{0}</strong>...", self.description[:80])
+    
+    @admin.display(ordering="name")
+    def pelicula(self):
+        return format_html("<span style='color:red';>{0}</span>", self.name)    
+    
+    @admin.display(ordering="rating")
+    def stars(self):
+        star = "⭐"*self.rating
+        return format_html("<span style='color:green';>{0}</span>", star)        
