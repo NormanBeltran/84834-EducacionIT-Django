@@ -7,6 +7,11 @@
 
 {% block content %}
 <main role="main" class="container">
+   {% if request.user.is_authenticated  %}  
+    <div class="card-body">
+        <a href="{% url 'pelicula_create' %}" class="btn btn-lg btn-info"><i class="fa fa-film mr-2"></i>Dar de Alta</a>
+    </div>
+  {% endif  %}
   {% if movie_list %}      
       <div class="list-group">            
       {% for movie in movie_list %}
@@ -25,10 +30,17 @@
                 <div class="text-justify m-2 p-2"><span>{{movie.description|safe}}</span></div>
               </div>
             </div>
-            <div class="card-footer text-muted">
+            {% if request.user.is_authenticated  %}                              
+              <div class="card-body">
+                  <a href="{% url 'pelicula_update' movie.id %}" class="btn btn-sm btn-primary">Editar</a>          
+                  <a href="{% url 'pelicula_delete' movie.id %}" class="btn btn-sm btn-danger">Eliminar</a>
+              </div>      
+            {% endif  %}
+           <div class="card-footer text-muted">
               {{movie.company}}
-            </div>              
+            </div>            
           </div>
+    
           <p>
       {% endfor %}
   </div>

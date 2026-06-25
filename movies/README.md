@@ -19,7 +19,7 @@
     - Películas (definir diferentes campos de películas inclusive imagenes)
 
 - Un usuario autenticado va a poder hacer CRUD solo sobre las películas
-- Un usuario autenticado va a poder ver solamente los géneros y compañías de la aplicación    
+- Un usuario no autenticado va a poder ver solamente los géneros y compañías de la aplicación    
 
 ## Tips de Desarrollo 
 
@@ -39,3 +39,22 @@
 - Trabaja por default con nombres por convención para los html y para los objetos que pasa a los htmls
 - Por ejemplo gender_list.html, o el queryset como gender_list
 - Sin embargo me permite cambiar las convenciones, podria redefinir el nombre del template (template_name)
+
+## Uso de aplicaciones de terceros
+
+### CKEditor: un editor mas completo que el que nos permite Django
+- pip install django-ckeditor==6.7.3 (instala la libreria en el entorno de trabajo)
+- settings.py
+    - Agregar la aplicacion 'ckeditor' en INSTALLED_APPS
+    - Configurar las diferentes opciones del editor
+- En forms.py
+    - Importamos el widget de CKEditor
+        - from ckeditor.widgets import CKEditorWidget
+    - En widgets:
+        - 'description': CKEditorWidget(),
+- En base.html
+    - <!-- CKEditor Javascript --> Entrada al final del html para el javascript de CKEditor
+    <script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
+    <script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>           
+- En static
+    - Copiamos la carpeta de ckeditor con los javascripts correspondientes    
